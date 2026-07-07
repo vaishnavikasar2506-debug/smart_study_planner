@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Study Planner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="study.css">
+</head>
+<body>
+
+  <!-- ============ AUTH SCREEN (Login / Sign up) ============ -->
+  <section id="authScreen" class="auth-screen">
+    <div class="auth-card">
+      <div class="auth-brand">
+        <span class="brand-mark">✎</span>
+        <h1>Smart Study Planner</h1>
+        <p>Plan it. Track it. Ace it.</p>
+      </div>
+
+      <div class="auth-tabs">
+        <button class="auth-tab active" data-tab="login">Log in</button>
+        <button class="auth-tab" data-tab="signup">Sign up</button>
+      </div>
+
+      <!-- Login form -->
+      <form id="loginForm" class="auth-form">
+        <label>Email
+          <input type="email" id="loginEmail" required placeholder="you@example.com">
+        </label>
+        <label>Password
+          <input type="password" id="loginPassword" required placeholder="••••••••">
+        </label>
+        <p id="loginError" class="form-error"></p>
+        <button type="submit" class="btn-primary">Log in</button>
+      </form>
+
+      <!-- Sign up form -->
+      <form id="signupForm" class="auth-form hidden">
+        <label>Name
+          <input type="text" id="signupName" required placeholder="Your name">
+        </label>
+        <label>Email
+          <input type="email" id="signupEmail" required placeholder="you@example.com">
+        </label>
+        <label>Password
+          <input type="password" id="signupPassword" required placeholder="At least 6 characters" minlength="6">
+        </label>
+        <p id="signupError" class="form-error"></p>
+        <button type="submit" class="btn-primary">Create account</button>
+      </form>
+
+      <p class="auth-note">Your data stays on this device — stored securely in your browser.</p>
+    </div>
+  </section>
+
+  <!-- ============ DASHBOARD ============ -->
+  <section id="dashboard" class="dashboard hidden">
+
+    <header class="topbar">
+      <div class="topbar-brand">
+        <span class="brand-mark">✎</span>
+        <span>Smart Study Planner</span>
+      </div>
+      <div class="topbar-user">
+        <span id="userGreeting">Hi, there</span>
+        <button id="logoutBtn" class="btn-ghost">Log out</button>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- Stats overview -->
+      <section class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-label">Total tasks</span>
+          <span class="stat-value" id="statTotal">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Completed</span>
+          <span class="stat-value" id="statDone">0</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Pending</span>
+          <span class="stat-value" id="statPending">0</span>
+        </div>
+        <div class="stat-card stat-card--ring">
+          <span class="stat-label">Progress</span>
+          <div class="ring-wrap">
+            <svg viewBox="0 0 100 100" class="progress-ring">
+              <circle class="ring-bg" cx="50" cy="50" r="42"></circle>
+              <circle class="ring-fill" id="progressRing" cx="50" cy="50" r="42"></circle>
+            </svg>
+            <span class="ring-text" id="progressPercent">0%</span>
+          </div>
+        </div>
+        <div class="stat-card">
+          <span class="stat-label">Study streak</span>
+          <span class="stat-value"><span id="statStreak">0</span> <small>days</small></span>
+        </div>
+      </section>
+
+      <!-- Add task -->
+      <section class="panel">
+        <h2>Add a study task</h2>
+        <form id="taskForm" class="task-form">
+          <input type="text" id="taskTitle" placeholder="e.g. Revise Chapter 4 — Thermodynamics" required>
+          <input type="text" id="taskSubject" placeholder="Subject (e.g. Physics)" required>
+          <input type="date" id="taskDate" required>
+          <select id="taskPriority">
+            <option value="low">Low priority</option>
+            <option value="medium" selected>Medium priority</option>
+            <option value="high">High priority</option>
+          </select>
+          <button type="submit" class="btn-primary">Add task</button>
+        </form>
+      </section>
+
+      <!-- Task list -->
+      <section class="panel">
+        <div class="panel-header">
+          <h2>Your tasks</h2>
+          <div class="filters">
+            <button class="filter-chip active" data-filter="all">All</button>
+            <button class="filter-chip" data-filter="pending">Pending</button>
+            <button class="filter-chip" data-filter="done">Completed</button>
+          </div>
+        </div>
+
+        <div id="taskList" class="task-list">
+          <!-- Task cards injected by JS -->
+        </div>
+
+        <p id="emptyState" class="empty-state hidden">
+          No tasks yet — add your first study task above and get started.
+        </p>
+      </section>
+
+    </main>
+  </section>
+
+<script src="script.js"></script>
+</body>
+</html>
